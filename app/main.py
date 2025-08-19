@@ -9,7 +9,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=[
+        "http://localhost:4200",              # for local Angular dev
+        "https://test.elpisglobalservice.com" # your hosted Angular app
+    ],
     allow_methods=["*"],
     allow_headers=["*"]
 )
