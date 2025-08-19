@@ -17,21 +17,21 @@ def fetch_top_students():
 
         
 
-def fetch_top_teachers():
-    db = SessionLocal()
-    try:
-        top_teachers = db.query(Teacher).order_by(Teacher.rating.desc()).limit(3).all()
-        global top_teachers_cache
-        top_teachers_cache = [{"id": t.id, "name": t.name, "rating": t.rating} for t in top_teachers]
-        print("Top 3 teachers updated.")
-    finally:
-        db.close()
+# def fetch_top_teachers():
+#     db = SessionLocal()
+#     try:
+#         top_teachers = db.query(Teacher).order_by(Teacher.rating.desc()).limit(3).all()
+#         global top_teachers_cache
+#         top_teachers_cache = [{"id": t.id, "name": t.name, "rating": t.rating} for t in top_teachers]
+#         print("Top 3 teachers updated.")
+#     finally:
+#         db.close()
 
-def evaluate_teacher_ratings():
-    print("Evaluating teacher ratings...")
+# def evaluate_teacher_ratings():
+#     print("Evaluating teacher ratings...")
 
 def start_cron_jobs():
     scheduler = BackgroundScheduler()
     scheduler.add_job(fetch_top_students, 'interval', seconds=60)
-    scheduler.add_job(fetch_top_teachers, 'interval', seconds=60)
+    # scheduler.add_job(fetch_top_teachers, 'interval', seconds=60)
     scheduler.start()
